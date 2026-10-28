@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">AIFadh project preview placeholder</title>
+  <desc id="desc">A branded graphic indicating that a project preview is coming soon, not a project screenshot.</desc>
+  <rect width="1200" height="630" fill="#17172b"/>
+  <path d="M0 506 430 76M258 630 888 0M796 630l404-404" fill="none" stroke="#5b5bf0" stroke-opacity=".22" stroke-width="2"/>
+  <rect x="76" y="78" width="1048" height="474" rx="36" fill="#21213a" stroke="#5b5bf0" stroke-opacity=".55" stroke-width="2"/>
+  <path d="M135 221 174 134l39 87M150 191h48M233 221v-85h35M233 176h33" fill="none" stroke="#f5f5f7" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="270" cy="221" r="10" fill="#e0508f"/>
+  <text x="135" y="343" fill="#f5f5f7" font-family="Arial, sans-serif" font-size="72" font-weight="700">AIFadh.</text>
+  <text x="135" y="416" fill="#c5c5e3" font-family="Arial, sans-serif" font-size="30">PROJECT PREVIEW COMING SOON</text>
+  <rect x="135" y="455" width="218" height="5" rx="2" fill="#e0508f"/>
+</svg>

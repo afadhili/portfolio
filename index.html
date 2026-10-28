@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f5f7" />
+    <title>Ahmad Isnainil Fadhili — AIFadh</title>
+    <meta
+      name="description"
+      content="AIFadh — frontend and backend developer, student of network security and AI in Indonesia."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ahmad Isnainil Fadhili — AIFadh" />
+    <meta
+      property="og:description"
+      content="Both sides of the stack. Curiosity meets craft."
+    />
+    <meta property="og:image" content="/og-placeholder.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ahmad Isnainil Fadhili — AIFadh" />
+    <meta
+      name="twitter:description"
+      content="Both sides of the stack. Curiosity meets craft."
+    />
+    <meta name="twitter:image" content="/og-placeholder.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- TODO: Replace the OG image with a hosted PNG/WebP and absolute URL when a domain is set. -->
+    <script>
+      ;(function () {
+        var theme = 'default'
+        var mode = matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light'
+        try {
+          var savedTheme = localStorage.getItem('theme-id')
+          var savedMode = localStorage.getItem('theme-mode')
+          var oldMode = localStorage.getItem('theme')
+          var supported = {
+            default: true,
+            catppuccin: true,
+            gruvbox: true,
+            dracula: true,
+            nord: true,
+            kanagawa: true,
+            rosepine: true,
+            tokyonight: true,
+          }
+          if (savedTheme && supported[savedTheme]) theme = savedTheme
+          var requested = savedMode || oldMode
+          if (
+            (savedTheme && !supported[savedTheme]) ||
+            (requested && requested !== 'dark' && requested !== 'light')
+          ) {
+            theme = 'default'
+          } else if (requested) {
+            mode = requested
+          }
+          if (theme === 'dracula' || theme === 'tokyonight') mode = 'dark'
+          if (localStorage.getItem('sidebar-collapsed') === 'true') {
+            document.documentElement.classList.add('sidebar-collapsed')
+          }
+        } catch (error) {
+          // Storage may be unavailable; keep system mode.
+        }
+        document.documentElement.dataset.theme = theme
+        document.documentElement.dataset.mode = mode
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,139 @@
+.credibility-section {
+  margin-top: var(--gap);
+}
+.credibility-grid {
+  grid-auto-rows: minmax(320px, auto);
+}
+.timeline-card h2,
+.activity-card h2 {
+  font-size: clamp(20px, 2vw, 26px);
+  margin: 8px 0 20px;
+  letter-spacing: -0.04em;
+}
+.timeline > ol {
+  position: relative;
+  list-style: none;
+  padding: 0 0 0 24px;
+  margin: 0;
+}
+.timeline > ol::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 10px;
+  left: 4px;
+  width: 1px;
+  background: var(--border-strong);
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 0.8s var(--ease-out);
+}
+.is-visible .timeline > ol::before {
+  transform: scaleY(1);
+}
+.timeline > ol > li {
+  position: relative;
+  margin-bottom: 8px;
+}
+.timeline-node {
+  position: absolute;
+  left: -24px;
+  top: 7px;
+  height: 9px;
+  width: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.timeline-entry h3 {
+  font-size: 16px;
+  line-height: 1.2;
+  margin: 6px 0 2px;
+}
+.timeline-entry p,
+.timeline-entry li {
+  color: var(--text-muted);
+  font-size: 11px;
+  margin: 0;
+}
+.timeline-entry ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 13px;
+  list-style: none;
+  padding: 5px 0 0;
+  margin: 0;
+}
+.timeline-entry ul li {
+  color: var(--accent);
+  font-size: 10px;
+
+  padding: 1px 6px;
+  border-radius: 999px;
+  background-color: var(--surface-2);
+}
+.github-activity p {
+  color: var(--text-muted);
+  font-size: 10px;
+  margin: 0 0 18px;
+}
+.activity-grid {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 5px;
+  width: min(100%, 360px);
+  height: 112px;
+}
+.activity-cell {
+  border-radius: 3px;
+  background: var(--surface-2);
+  opacity: 0;
+  transform: scale(0.5);
+  transition:
+    transform 0.35s var(--ease-out),
+    opacity 0.35s;
+  transition-delay: calc(var(--cell) * 23ms);
+}
+.is-visible .activity-cell {
+  opacity: 1;
+  transform: none;
+}
+.activity-level-1 {
+  background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+}
+.activity-level-2 {
+  background: color-mix(in srgb, var(--accent) 37%, var(--surface));
+}
+.activity-level-3 {
+  background: color-mix(in srgb, var(--accent) 62%, var(--surface));
+}
+.activity-level-4 {
+  background: var(--accent);
+}
+.activity-caption {
+  color: var(--text-subtle);
+  font: 9px monospace;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-top: 10px;
+}
+@media (max-width: 640px) {
+  .credibility-grid .card {
+    grid-column: 1;
+    grid-row: auto;
+    min-height: 320px;
+  }
+  .activity-grid {
+    height: 120px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .timeline > ol::before {
+    transform: scaleY(1);
+  }
+  .activity-cell {
+    opacity: 1;
+    transform: none;
+  }
+}
