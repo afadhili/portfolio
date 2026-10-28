@@ -10,9 +10,11 @@ import '../styles/credibility.css'
 import '../styles/github-projects.css'
 import '../styles/section-polish.css'
 import '../styles/mobile.css'
+import NotFound from '#/components/NotFound'
 
 export const Route = createRootRoute({
   component: RootComponent,
+  notFoundComponent: NotFound,
 })
 
 function RootComponent() {

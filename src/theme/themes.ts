@@ -17,7 +17,7 @@ export const THEMES = [
     id: 'gruvbox',
     label: 'Gruvbox',
     modes: ['light', 'dark'],
-    swatch: ['#fe8019', '#d3869b', '#282828'],
+    swatch: ['#fabd2f', '#fe8019', '#282828'],
   },
   {
     id: 'dracula',

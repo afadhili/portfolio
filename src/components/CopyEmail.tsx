@@ -68,7 +68,7 @@ export function CopyEmail({
             <path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" />
           </svg>
         ))}
-      {copied ? 'Copied' : links.email ? 'Copy email' : 'Email coming soon'}
+      {copied ? 'Copied' : links.email ? links.email : 'Email coming soon'}
     </button>
   )
 }

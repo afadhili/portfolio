@@ -5,7 +5,6 @@ import { SiteSidebar } from '../components/SiteSidebar'
 import { ProjectCard } from '../components/ProjectCard'
 import { ProjectPagination } from '../components/ProjectPagination'
 import { Marquee } from '../components/Marquee'
-import { ToolLogo } from '../components/ToolLogo'
 import { CopyEmail } from '../components/CopyEmail'
 
 import { Timeline } from '../components/Timeline'
@@ -13,7 +12,7 @@ import { GithubActivity } from '../components/GithubActivity'
 import { useGithubActivity } from '../components/useGithubActivity'
 import { pinnedProjects, projectsFromRepositories } from '../content/data'
 
-import { links } from '../content/links'
+import { links, portfolioLinksV2 } from '../content/links'
 
 import { uses } from '../content/uses'
 import { lastUpdated, projectsPerPage } from '../content/site'
@@ -597,10 +596,7 @@ function Home() {
                   {uses.map((item) => (
                     <div key={item.label}>
                       <dt>{item.label.toLowerCase()}</dt>
-                      <dd>
-                        <ToolLogo name={item.value} />
-                        <span>{item.value}</span>
-                      </dd>
+                      <dd>{item.value}</dd>
                     </div>
                   ))}
                 </dl>
@@ -685,32 +681,23 @@ function Home() {
             </div>
             <div className="contact-actions">
               <CopyEmail />
-              <a
-                href={links.github || undefined}
-                className={`button button-outline${!links.github ? ' is-disabled' : ''}`}
-                target="_blank"
-                rel="noreferrer"
-                aria-disabled={!links.github}
-              >
-                GitHub ↗
-              </a>
-              <a
-                href={links.linkedin || undefined}
-                className={`button button-outline${!links.linkedin ? ' is-disabled' : ''}`}
-                target="_blank"
-                rel="noreferrer"
-                aria-disabled={!links.linkedin}
-              >
-                LinkedIn ↗
-              </a>
-              <a
-                href={links.cv || undefined}
-                className={`button button-outline${!links.cv ? ' is-disabled' : ''}`}
-                download={Boolean(links.cv)}
-                aria-disabled={!links.cv}
-              >
-                Download CV ↓
-              </a>
+              {portfolioLinksV2.map((item) => (
+                <>
+                  <a
+                    href={item.link}
+                    key={item.name}
+                    className="button button-outline"
+                    rel="noreferrer"
+                  >
+                    <img
+                      src={item.logo}
+                      alt={item.name + ' logo'}
+                      style={{ width: '20px', height: '20px' }}
+                    />
+                    {item.name}
+                  </a>
+                </>
+              ))}
             </div>
           </div>
         </section>
