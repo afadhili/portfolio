@@ -21,7 +21,7 @@ The Projects bento is a hand-curated composition of six public repositories. On 
 
 - `src/content/links.ts`: contact email from local configuration (**not verified by the public GitHub API**), verified GitHub profile URL, and TODO LinkedIn and CV links.
 
-- `src/content/uses.ts`: configured OS/distro, editor, terminal, shell, and theme; check that they still match your setup.
+- `src/content/uses.ts`: configured OS/distro, editor, terminal, shell, and theme; check that they still match your setup. Their logos and the toolbox marquee logos are local assets in `public/tool-logos/`, mapped by `src/components/ToolLogo.tsx`. Most SVGs come from [Simple Icons](https://simpleicons.org/) (CC0); the [Foot icon](https://codeberg.org/dnkl/foot/src/branch/master/icons/hicolor/scalable/apps/foot.svg) credits Lennard Hofmann, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), and the Catppuccin mark comes from the [Catppuccin project](https://github.com/catppuccin/catppuccin/tree/main/assets/logos/exports).
 - `src/content/timeline.ts`: university information and TODO coursework, labs, achievements, date, and institution.
 - `src/content/caseStudies.ts`: published repository details and real YT Music CLI screenshots; TODO personal outcomes and any TIF-IDE screenshots.
 - `src/content/posts.ts` and `src/content/articles/`: three editable project-based articles. Each published entry has a Markdown file named after its slug; the standalone `/articles` page lists them all and links case studies, and `/articles/:slug` renders the Markdown. The homepage no longer has an articles section; articles remain accessible from the sidebar. Add personal lessons or real publication dates when you have them; no dates are shown until then.

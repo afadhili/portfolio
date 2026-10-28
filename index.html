@@ -66,9 +66,337 @@
         document.documentElement.dataset.mode = mode
       })()
     </script>
+    <style>
+      #site-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        display: grid;
+        place-items: center;
+        background: var(--bg, #f5f5f7);
+        color: var(--text, #0f0f14);
+        transition:
+          opacity 220ms ease,
+          visibility 220ms ease;
+      }
+      :root[data-mode='dark'] #site-loader {
+        background: var(--bg, #09090b);
+        color: var(--text, #f4f4f6);
+      }
+      #site-loader.is-exiting {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .site-loader__content {
+        display: grid;
+        justify-items: center;
+        gap: 17px;
+      }
+      .site-loader__identity {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: min(420px, calc(100vw - 32px));
+        height: 90px;
+        overflow: hidden;
+        border: 1px solid var(--border, currentColor);
+        border-radius: 24px;
+        background: linear-gradient(
+          135deg,
+          color-mix(
+            in srgb,
+            var(--accent, currentColor) 13%,
+            var(--surface, transparent)
+          ),
+          var(--surface, transparent) 48%,
+          color-mix(
+            in srgb,
+            var(--accent-2, currentColor) 13%,
+            var(--surface, transparent)
+          )
+        );
+        box-shadow: var(--shadow-md, none);
+        animation: loader-shrink 1500ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      }
+      .site-loader__identity::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          100deg,
+          transparent 25%,
+          color-mix(in srgb, var(--accent-2, currentColor) 20%, transparent) 50%,
+          transparent 75%
+        );
+        transform: translateX(-100%);
+        animation: loader-shimmer 1500ms ease-in-out both;
+      }
+      .site-loader__full-name,
+      .site-loader__mark {
+        position: absolute;
+        white-space: nowrap;
+        font-family: system-ui, sans-serif;
+        font-weight: 750;
+      }
+      .site-loader__full-name {
+        display: flex;
+        gap: 0.25em;
+        font-size: clamp(16px, 4.3vw, 29px);
+        letter-spacing: -0.045em;
+        animation: loader-name-to-mark 1500ms ease-in-out both;
+      }
+      .site-loader__full-name span {
+        display: inline-block;
+        animation: loader-word-in 420ms ease-out both;
+      }
+      .site-loader__full-name span:nth-child(1) {
+        color: var(--accent, currentColor);
+      }
+      .site-loader__full-name span:nth-child(2) {
+        color: color-mix(
+          in srgb,
+          var(--accent-2, currentColor) 45%,
+          var(--text, currentColor)
+        );
+        animation-delay: 80ms;
+      }
+      .site-loader__full-name span:nth-child(3) {
+        color: color-mix(
+          in srgb,
+          var(--accent, currentColor) 45%,
+          var(--text, currentColor)
+        );
+        animation-delay: 160ms;
+      }
+      .site-loader__mark {
+        display: flex;
+        font-size: 48px;
+        line-height: 1;
+        letter-spacing: -0.13em;
+        animation: loader-mark-reveal 1500ms ease-out both;
+      }
+      .site-loader__mark span {
+        display: inline-block;
+        animation: loader-glyph-in 450ms ease-out both;
+        animation-delay: 820ms;
+      }
+      .site-loader__mark span:nth-child(1) {
+        color: var(--accent, currentColor);
+      }
+      .site-loader__mark span:nth-child(2) {
+        color: color-mix(
+          in srgb,
+          var(--accent-2, currentColor) 55%,
+          var(--text, currentColor)
+        );
+        animation-delay: 900ms;
+      }
+      .site-loader__mark span:nth-child(3) {
+        color: color-mix(
+          in srgb,
+          var(--accent, currentColor) 55%,
+          var(--text, currentColor)
+        );
+        animation-delay: 980ms;
+      }
+      .site-loader__mark span:nth-child(4) {
+        color: var(--accent-2, currentColor);
+        animation-delay: 1060ms;
+      }
+      .site-loader__name {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        animation: loader-label-in 1500ms ease-out both;
+      }
+      .site-loader__bar {
+        position: relative;
+        width: 112px;
+        height: 3px;
+        overflow: hidden;
+        border-radius: 3px;
+        background: var(--border, currentColor);
+      }
+      .site-loader__bar::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          var(--accent, currentColor),
+          var(--accent-2, currentColor)
+        );
+        animation: loader-sweep 1.2s ease-in-out infinite alternate;
+      }
+      .site-loader__status {
+        margin: 0;
+        color: var(--text-muted, inherit);
+        font-size: 12px;
+      }
+      .site-loader__retry {
+        display: none;
+      }
+      #site-loader.is-stalled .site-loader__retry {
+        display: block;
+        border: 1px solid var(--border-strong, currentColor);
+        border-radius: 8px;
+        padding: 8px 14px;
+        background: var(--surface, transparent);
+        color: inherit;
+        font: inherit;
+        cursor: pointer;
+      }
+      @keyframes loader-shrink {
+        0%,
+        50% {
+          width: min(420px, calc(100vw - 32px));
+        }
+        90%,
+        100% {
+          width: 90px;
+        }
+      }
+      @keyframes loader-name-to-mark {
+        0% {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        20%,
+        50% {
+          opacity: 1;
+          transform: none;
+        }
+        75%,
+        100% {
+          opacity: 0;
+          transform: scale(0.55);
+        }
+      }
+      @keyframes loader-mark-reveal {
+        0%,
+        60% {
+          opacity: 0;
+          transform: scale(0.65);
+        }
+        92%,
+        100% {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes loader-word-in {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes loader-glyph-in {
+        from {
+          opacity: 0;
+          transform: translateY(8px) scale(0.75);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes loader-shimmer {
+        0%,
+        25% {
+          transform: translateX(-100%);
+        }
+        85%,
+        100% {
+          transform: translateX(100%);
+        }
+      }
+      @keyframes loader-label-in {
+        0%,
+        65% {
+          opacity: 0;
+          transform: translateY(6px);
+        }
+        100% {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes loader-sweep {
+        from {
+          transform: translateX(-90%);
+        }
+        to {
+          transform: translateX(90%);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #site-loader {
+          transition: none;
+        }
+        .site-loader__identity,
+        .site-loader__identity::before,
+        .site-loader__full-name,
+        .site-loader__full-name span,
+        .site-loader__mark,
+        .site-loader__mark span,
+        .site-loader__name,
+        .site-loader__bar::after {
+          animation: none;
+        }
+        .site-loader__identity {
+          width: 90px;
+        }
+        .site-loader__full-name {
+          display: none;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="site-loader" role="status" aria-live="polite" data-started="">
+      <div class="site-loader__content">
+        <div class="site-loader__identity" aria-hidden="true">
+          <span class="site-loader__full-name">
+            <span>Ahmad</span>
+            <span>Isnainil</span>
+            <span>Fadhili</span>
+          </span>
+          <span class="site-loader__mark">
+            <span>a</span><span>i</span><span>f</span><span>.</span>
+          </span>
+        </div>
+        <p class="site-loader__name">AIFadh</p>
+        <div class="site-loader__bar" aria-hidden="true"></div>
+        <p class="site-loader__status">Loading portfolio…</p>
+        <button
+          class="site-loader__retry"
+          type="button"
+          onclick="location.reload()"
+        >
+          Retry
+        </button>
+      </div>
+    </div>
+    <script>
+      ;(function () {
+        var loader = document.getElementById('site-loader')
+        loader.dataset.started = String(performance.now())
+        window.setTimeout(function () {
+          if (loader.isConnected && !loader.classList.contains('is-exiting')) {
+            loader.classList.add('is-stalled')
+            loader.querySelector('.site-loader__status').textContent =
+              'Still loading. Check your connection and retry.'
+          }
+        }, 8000)
+      })()
+    </script>
+    <div id="app" inert></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

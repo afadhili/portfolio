@@ -5,6 +5,7 @@ import { SiteSidebar } from '../components/SiteSidebar'
 import { ProjectCard } from '../components/ProjectCard'
 import { ProjectPagination } from '../components/ProjectPagination'
 import { Marquee } from '../components/Marquee'
+import { ToolLogo } from '../components/ToolLogo'
 import { CopyEmail } from '../components/CopyEmail'
 
 import { Timeline } from '../components/Timeline'
@@ -176,14 +177,16 @@ function Home() {
               style={{ '--i': 0 } as React.CSSProperties}
             >
               <div className="hero-top">
-                <img
-                  className="hero-avatar-mobile"
-                  src={github.profile.avatarUrl}
-                  alt=""
-                  width="72"
-                  height="72"
-                  fetchPriority="high"
-                />
+                <span className="profile-photo-frame hero-avatar-frame">
+                  <img
+                    className="hero-avatar-mobile"
+                    src={github.profile.avatarUrl}
+                    alt=""
+                    width="72"
+                    height="72"
+                    fetchPriority="high"
+                  />
+                </span>
                 <span className="eyebrow">
                   FRONTEND + BACKEND DEVELOPER{' '}
                   <span className="hero-cursor" aria-hidden="true">
@@ -257,15 +260,17 @@ function Home() {
               <div className="portrait-monogram" aria-hidden="true">
                 a<span>i</span>f<span className="portrait-dot">.</span>
               </div>
-              <img
-                className="portrait-photo"
-                src={github.profile.avatarUrl}
-                alt="Ahmad Isnainil Fadhili’s GitHub avatar"
-                width="180"
-                height="180"
-                loading="lazy"
-                fetchPriority="low"
-              />
+              <span className="profile-photo-frame portrait-photo-frame">
+                <img
+                  className="portrait-photo"
+                  src={github.profile.avatarUrl}
+                  alt="Ahmad Isnainil Fadhili’s GitHub avatar"
+                  width="180"
+                  height="180"
+                  loading="lazy"
+                  fetchPriority="low"
+                />
+              </span>
               <div className="portrait-caption">
                 <span>GITHUB / @{github.profile.username}</span>
                 <span>↗</span>
@@ -592,7 +597,10 @@ function Home() {
                   {uses.map((item) => (
                     <div key={item.label}>
                       <dt>{item.label.toLowerCase()}</dt>
-                      <dd>{item.value}</dd>
+                      <dd>
+                        <ToolLogo name={item.value} />
+                        <span>{item.value}</span>
+                      </dd>
                     </div>
                   ))}
                 </dl>

@@ -256,11 +256,38 @@
     font-size: 13px;
   }
 }
+.profile-photo-frame {
+  position: relative;
+  display: block;
+  flex: none;
+  isolation: isolate;
+  border-radius: 50%;
+}
+.profile-photo-frame::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  inset: var(--photo-border, 5px);
+  border-radius: 50%;
+  background: var(--accent);
+  mix-blend-mode: color;
+  opacity: 0;
+  pointer-events: none;
+}
+:root[data-theme]:not([data-theme='default']) .profile-photo-frame::after {
+  opacity: 0.32;
+}
+.portrait-photo-frame {
+  z-index: 1;
+  width: min(68%, 180px);
+  aspect-ratio: 1;
+}
 .portrait-photo {
   position: relative;
   z-index: 1;
-  width: min(68%, 180px);
-  height: auto;
+  display: block;
+  width: 100%;
+  height: 100%;
   aspect-ratio: 1;
   border-radius: 50%;
   border: 5px solid color-mix(in srgb, var(--surface) 75%, transparent);
@@ -486,7 +513,7 @@
   font-weight: 600;
 }
 @media (max-width: 640px) {
-  .portrait-photo {
+  .portrait-photo-frame {
     width: 130px;
   }
   .github-events li a {

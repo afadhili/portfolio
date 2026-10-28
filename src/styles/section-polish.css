@@ -210,16 +210,22 @@
 .sidebar-socials a {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;
+  min-height: 35px;
   padding: 0 11px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-strong);
   font-size: 11px;
   color: var(--text);
+  width: 100%;
+  gap: 6px;
 }
 .sidebar-socials a:hover {
   color: var(--accent);
   border-color: var(--accent);
+}
+.sidebar-socials a img {
+  width: 20px;
+  height: 20px;
 }
 @media (max-width: 1024px) {
   .intro-grid {

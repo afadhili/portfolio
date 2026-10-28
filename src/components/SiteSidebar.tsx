@@ -4,6 +4,7 @@ import { ThemeToggle } from './ThemeToggle'
 import { ThemePicker } from '../theme/ThemePicker'
 import { CommandPalette } from './CommandPalette'
 import { links } from '../content/links'
+import { useTheme } from '#/theme/useTheme'
 
 const navigation = [
   { id: 'about', label: 'About', number: '01', icon: '⌂' },
@@ -42,6 +43,7 @@ export function SiteSidebar() {
   const [navVisible, setNavVisible] = useState(true)
   const lastScroll = useRef(0)
   const lastG = useRef(0)
+  const { mode } = useTheme()
 
   useEffect(() => {
     document.documentElement.classList.toggle('sidebar-collapsed', collapsed)
@@ -294,6 +296,9 @@ export function SiteSidebar() {
                 rel="noreferrer"
                 aria-label="GitHub profile (opens in new tab)"
               >
+                <img
+                  src={mode == 'dark' ? '/github-dark.svg' : '/github.svg'}
+                />
                 GitHub ↗
               </a>
               {links.linkedin && (

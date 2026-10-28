@@ -1,4 +1,5 @@
 import { stack } from '../content/data'
+import { ToolLogo } from './ToolLogo'
 
 export function Marquee() {
   return (
@@ -8,7 +9,7 @@ export function Marquee() {
           <div className="marquee__set" key={copy}>
             {stack.map((name) => (
               <span className="marquee__item" key={name}>
-                <span className="marquee__star">✳</span>
+                <ToolLogo name={name} />
                 {name}
               </span>
             ))}
